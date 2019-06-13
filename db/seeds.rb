@@ -132,5 +132,51 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+prod1 = Product.find_or_create_by! name: 'Men\'s Classy shirt'
+prod2 = Product.find_or_create_by! name: 'Women\'s Zebra pants'
+prod3 = Product.find_or_create_by! name: 'Hipster Hat'
+
+
+prod1.ratings.create({
+  product_id:  1,
+  user_id: 1,
+  description: 'Not bad',
+  rating: 4,
+})
+
+prod1.ratings.create({
+  product_id:  1,
+  user_id: 2,
+  description: 'bad',
+  rating: 1,
+})
+
+prod2.ratings.create({
+  product_id:  2,
+  user_id: 1,
+  description: 'great',
+  rating: 5,
+})
+
+prod2.ratings.create({
+  product_id:  2,
+  user_id: 2,
+  description: 'mediocre',
+  rating: 4,
+})
+
+prod3.ratings.create({
+  product_id:  3,
+  user_id: 1,
+  description: 'horrible',
+  rating: 1,
+})
+
+prod3.ratings.create({
+  product_id:  3,
+  user_id: 2,
+  description: 'horrible',
+  rating: 1,
+})
 
 puts "DONE!"
