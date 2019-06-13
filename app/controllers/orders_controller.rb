@@ -2,6 +2,8 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order_items = @order.line_items
+
   end
 
   def create
@@ -11,6 +13,8 @@ class OrdersController < ApplicationController
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
+      UserMailer.order_receipt(current_user, order.id).deliver_now
+      puts ActionMailer::Base.deliveries.last
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
