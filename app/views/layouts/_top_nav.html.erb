@@ -44,6 +44,11 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
+        <% if current_user %>
+        <li>
+          <%= link_to 'Log Out', logout_url, method: :get %>
+        </li>
+        <% end %>
       </ul>
     </div>
   </div>
