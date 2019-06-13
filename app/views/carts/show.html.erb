@@ -3,7 +3,7 @@
   <header class="page-header">
     <h1>My Cart</h1>
   </header>
-
+  <% if enhanced_cart.length != 0 %>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -48,5 +48,13 @@
       <% end %>
     </div>
   </div>
+  <% else %>
+  <style>
+    h2 {color:gray}
+  </style>
+  <h2> There are currently no items in your cart </h2>
+  Return to:
+  <%= link_to "Home Page", products_path, method: :get %>
+  <% end %>
 
 </section>
