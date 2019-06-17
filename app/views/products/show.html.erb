@@ -22,6 +22,32 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <dt>Ratings</dt>
+          <ul style="list-style-type:square;">
+            <dd><% for rating in @ratings %>
+            <% if rating.product_id == @product.id %>
+              <li>
+                <div><%= rating.rating %>/5</div>
+                <div>Description: <%= rating.description %></div>
+                <div>
+                  <% if current_user.id == rating.user_id %>
+                  <%= link_to 'Delete Your Review', product_rating_path(rating.product_id, rating.id), method: :delete, data: { confirm: 'Are you sure you want to delete you review?'} %>
+                  <% end %>
+                </div>
+              <% end %>
+              </li>
+            <% end %>
+            </dd>
+          </ul>
+          <% if current_user %>
+          <dd>
+            <%= form_for :rating, url: "#{@product.id}/ratings" do |f| %>
+            <%= f.text_area :description, :required => 'required' %>
+            <%= f.select :rating, (1..5) %>
+            <%= f.submit "Submit Rating" %>
+            <% end %>
+          </dd>
+          <% end %>
         </dl>
       </div>
     </div>

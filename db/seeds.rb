@@ -112,7 +112,7 @@ cat3.products.create!({
   name:  'Optimal Sleeping Bed',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('furniture1.jpg'),
-  quantity: 320,
+  quantity: 0,
   price: 3_052.00
 })
 
@@ -120,7 +120,7 @@ cat3.products.create!({
   name:  'Electric Chair',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('furniture2.jpg'),
-  quantity: 0,
+  quantity: 100,
   price: 987.65
 })
 
@@ -132,5 +132,51 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+prod1 = Product.find_or_create_by! name: 'Men\'s Classy shirt'
+prod2 = Product.find_or_create_by! name: 'Women\'s Zebra pants'
+prod3 = Product.find_or_create_by! name: 'Hipster Hat'
+
+
+prod1.ratings.create({
+  product_id:  1,
+  user_id: 1,
+  description: 'Not bad',
+  rating: 4,
+})
+
+prod1.ratings.create({
+  product_id:  1,
+  user_id: 2,
+  description: 'bad',
+  rating: 1,
+})
+
+prod2.ratings.create({
+  product_id:  2,
+  user_id: 1,
+  description: 'great',
+  rating: 5,
+})
+
+prod2.ratings.create({
+  product_id:  2,
+  user_id: 2,
+  description: 'mediocre',
+  rating: 4,
+})
+
+prod3.ratings.create({
+  product_id:  3,
+  user_id: 1,
+  description: 'horrible, do not buy at all!',
+  rating: 1,
+})
+
+prod3.ratings.create({
+  product_id:  3,
+  user_id: 2,
+  description: 'waste of money',
+  rating: 1,
+})
 
 puts "DONE!"
